@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import axios from "axios";
+import api from "@/lib/axios/axios";
 
 interface ResponseDataLogin {
   status: number;
@@ -15,8 +15,8 @@ export async function POST(request: Request) {
     const cookiesStorage = await cookies();
     const formData = await request.json();
 
-    const { data: responseData } = await axios.post<ResponseDataLogin>(
-      "http://localhost:3333/auth/signIn",
+    const { data: responseData } = await api.post<ResponseDataLogin>(
+      "auth/signIn",
       formData
     );
     const { data, message, status } = responseData;
